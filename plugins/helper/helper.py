@@ -108,15 +108,17 @@ class Helper():
         if type == 'send_user':
             link_1 = link
             markup = InlineKeyboardMarkup([
-                [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', 'ya_confirm'), InlineKeyboardButton('delete post', 'tidak_confirm')]
+                [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', callback_data="pinned_post"), InlineKeyboardButton('delete post', 'delete_post')]
             ])
         await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil Terkirim\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner", reply_markup=markup)
     
-    async def send_to_user_id_ya(client: Client, query: CallbackQuery):
-        await msg.edit('pinned post, tunggu sebentar', reply_markup = None)
+    def Callback_query(client, CallbackQuery):
+        if CallbackQuery.data == "pinned_post":
+            await msg.edit('pinned post, tunggu sebentar', reply_markup = None)
 
-    async def send_to_user_id_tidak(client: Client, query: CallbackQuery):
-        await msg.edit('delete post, tunggu sebentar', reply_markup = None)
+    def Callback_query(client, CallbackQuery):
+        if CallbackQuery.data == "delete_post":
+            await msg.edit('delete post, tunggu sebentar', reply_markup = None)
 
     def formatrupiah(self, uang):
         y = str(uang)
