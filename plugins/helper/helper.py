@@ -3,7 +3,7 @@ import pytz
 
 import pyrogram
 from pyrogram.errors import UserNotParticipant
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, Update
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, Update, CallbackQuery
 from pyrogram import enums, Client
 
 from datetime import datetime
@@ -108,10 +108,16 @@ class Helper():
         if type == 'send_user':
             link_1 = link
             markup = InlineKeyboardMarkup([
-                [InlineKeyboardButton('Check postingan', url=link_1)]
+                [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', 'ya_confirm'), InlineKeyboardButton('delete post', 'tidak_confirm')]
             ])
         await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil Terkirim\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner", reply_markup=markup)
     
+    async def send_to_user_id_ya(client: Client, query: CallbackQuery):
+        await msg.edit('pinned post, tunggu sebentar', reply_markup = None)
+
+    async def send_to_user_id_tidak(client: Client, query: CallbackQuery):
+        await msg.edit('delete post, tunggu sebentar', reply_markup = None)
+
     def formatrupiah(self, uang):
         y = str(uang)
         if int(y) < 0:
