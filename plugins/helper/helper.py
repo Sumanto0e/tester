@@ -114,11 +114,27 @@ class Helper():
     
     def Callback_query(client, CallbackQuery):
         if CallbackQuery.data == "pinned_post":
-            await msg.edit('pinned post, tunggu sebentar', reply_markup = None)
+
+            PAGE1_TEXT = "pinned post, tunggu sebentar"
+
+            PAGE1_BUTTON = [
+                    [
+                        [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', callback_data="pinned_post"), InlineKeyboardButton('delete post', 'delete_post')]
+                    ]
+            ]
+
 
     def Callback_query(client, CallbackQuery):
         if CallbackQuery.data == "delete_post":
-            await msg.edit('delete post, tunggu sebentar', reply_markup = None)
+
+            PAGE1_TEXT = "delete post, tunggu sebentar"
+
+            PAGE1_BUTTON = [
+                    [
+                        [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', callback_data="pinned_post"), InlineKeyboardButton('delete post', 'delete_post')]
+                    ]
+            ]
+
 
     def formatrupiah(self, uang):
         y = str(uang)
