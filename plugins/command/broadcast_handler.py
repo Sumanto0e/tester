@@ -50,13 +50,13 @@ async def broadcast_ya(client: Client, query: CallbackQuery):
         except InputUserDeactivated:
             dihapus += 1
             await db.hapus_pelanggan(user_id)
-    text = f"""<b>Broadcast selesai</b>
+    await msg.edit (f"""<b>Broadcast selesai</b>
     
 Jumlah pengguna: {str(len(user_ids))}
 Berhasil terkirim: {str(berhasil)}
 Pengguna diblokir: {str(blokir)}
 Akun yang dihapus: {str(dihapus)} (<i>Telah dihapus dari database</i>)
-Gagal terkirim: {str(gagal)}"""
+Gagal terkirim: {str(gagal)}""")
 
     await msg.reply(text)
     await msg.delete()
