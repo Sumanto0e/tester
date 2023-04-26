@@ -110,16 +110,26 @@ class Helper():
         if type == 'send_user':
             link_1 = link
             markup = InlineKeyboardMarkup([
-                [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', 'pinned_post'), InlineKeyboardButton('delete post', 'delete_post')]
+                [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', callback_data='pinned_post'), InlineKeyboardButton('delete post', callback_data='delete_post')]
             ])
-        await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil Terkirim\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner", reply_markup=markup)
+        await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil di Pin\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner", reply_markup=markup)
 
-    async def pinned_post(client: Client, query: CallbackQuery):
-        await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
-            
-    async def delete_post(client: Client, query: CallbackQuery):
-        await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
+    async def pinned_to_user_id(self, type: str = None, link: str = None):
+        if CallbackQuery.data == 'pinned_post':
+            if type == 'pinned_user':
+                link_1 = link
+                markup = InlineKeyboardMarkup([
+                    [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('delete post', 'delete_post')]
+                ])
+            await self.bot.message.pinned_post(link_1)
+            await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil di Delete\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner", reply_markup=markup)
 
+    async def delete_to_user_id(self, type: str = None, link: str = None):
+        if CallbackQuery.data == 'delete-post':
+            if type == 'delete_user':
+                link_1 = link
+            await self.bot.message.delete(link_1)
+            await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil Terkirim\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner")
 
     def formatrupiah(self, uang):
         y = str(uang)
