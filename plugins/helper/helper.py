@@ -3,7 +3,9 @@ import pytz
 
 import pyrogram
 from pyrogram.errors import UserNotParticipant
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, Update, CallbackQuery
+from pyrogram.types import (
+    Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
+)
 from pyrogram import enums, Client
 
 from datetime import datetime
@@ -108,17 +110,15 @@ class Helper():
         if type == 'send_user':
             link_1 = link
             markup = InlineKeyboardMarkup([
-                [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', callback_data='pinned_post'), InlineKeyboardButton('delete post', 'delete_post')]
+                [InlineKeyboardButton('Check postingan', url=link_1)], [InlineKeyboardButton('pinned post', 'pinned_post'), InlineKeyboardButton('delete post', 'delete_post')]
             ])
         await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil Terkirim\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner", reply_markup=markup)
 
     async def pinned_post(client: Client, query: CallbackQuery):
-        if CallbackQuery.data == "pinned_post":
-            await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
+        await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
             
-    async def Callback_query(client: Client, query: CallbackQuery):
-        if CallbackQuery.data == "delete_post":
-            await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
+    async def delete_post(client: Client, query: CallbackQuery):
+        await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
 
 
     def formatrupiah(self, uang):
