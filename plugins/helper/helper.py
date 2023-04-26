@@ -112,11 +112,11 @@ class Helper():
             ])
         await self.bot.send_message(self.user_id, f"✅ Pesan Telah Berhasil Terkirim\n\nOUR PARTNER:\n-CURTHAT : @menfesonsbase\n-RATED : @ratemyonspartner", reply_markup=markup)
 
-    async def pinned_post(client, CallbackQuery):
+    async def pinned_post(client: Client, query: CallbackQuery):
         if CallbackQuery.data == "pinned_post":
             await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
             
-    async def Callback_query(client, CallbackQuery):
+    async def Callback_query(client: Client, query: CallbackQuery):
         if CallbackQuery.data == "delete_post":
             await msg.edit('Broadcast sedang berlangsung, tunggu sebentar', reply_markup = None)
 
